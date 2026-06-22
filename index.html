@@ -1,36 +1,858 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Sandbox Lab</title>
-<meta name="robots" content="noindex,nofollow">
-</head>  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>JujuJourney — Learning in Public</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* =====================
+       TOKENS
+    ===================== */
+    :root {
+      --ink:       #1a1a18;
+      --paper:     #f7f4ee;
+      --teal:      #2d7d78;
+      --teal-soft: #e8f3f2;
+      --gold:      #b8963e;
+      --mist:      #e8e4db;
+      --body-font: 'Inter', sans-serif;
+      --head-font: 'Playfair Display', serif;
+    }
 
+    /* =====================
+       RESET & BASE
+    ===================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--body-font);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* =====================
+       LAYOUT
+    ===================== */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--mist);
+    }
+
+    section:last-of-type { border-bottom: none; }
+
+    /* =====================
+       HEADER / PASSPORT
+    ===================== */
+    header {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 72px 24px 56px;
+      text-align: center;
+    }
+
+    .passport-label {
+      font-family: var(--body-font);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-family: var(--head-font);
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    header h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .tagline {
+      font-size: 1rem;
+      font-weight: 300;
+      color: #b0aa9e;
+      max-width: 480px;
+      margin: 0 auto 36px;
+    }
+
+    /* Boarding pass strip — the signature element */
+    .boarding-strip {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid #3a3a36;
+      border-radius: 4px;
+      padding: 12px 24px;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #b0aa9e;
+      font-family: 'Courier New', monospace;
+    }
+
+    .boarding-strip span { color: var(--gold); }
+
+    /* =====================
+       NAV
+    ===================== */
+    nav {
+      background: var(--teal);
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 0;
+      max-width: 860px;
+      margin: 0 auto;
+      overflow-x: auto;
+    }
+
+    nav ul li a {
+      display: block;
+      padding: 14px 18px;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+
+    nav ul li a:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* =====================
+       SECTION LABELS
+    ===================== */
+    .section-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-family: var(--head-font);
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 400;
+      margin-bottom: 16px;
+      line-height: 1.25;
+    }
+
+    .section-intro {
+      font-size: 0.95rem;
+      color: #555;
+      max-width: 600px;
+      margin-bottom: 36px;
+    }
+
+    /* =====================
+       PASSPORT SECTION
+    ===================== */
+    .passport-bio {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    @media (max-width: 600px) {
+      .passport-bio { grid-template-columns: 1fr; }
+    }
+
+    .bio-block h3 {
+      font-family: var(--head-font);
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+
+    .bio-block p {
+      font-size: 0.9rem;
+      color: #444;
+      line-height: 1.75;
+    }
+
+    /* =====================
+       FLIGHT PLAN SECTION
+    ===================== */
+    .flightplan-intro {
+      font-size: 0.95rem;
+      color: #555;
+      max-width: 640px;
+      margin-bottom: 36px;
+    }
+
+    /* Engine block */
+    .engine {
+      background: var(--ink);
+      color: var(--paper);
+      border-radius: 6px;
+      padding: 28px 28px 24px;
+      margin-bottom: 24px;
+    }
+
+    .engine .engine-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .engine h3 {
+      font-family: var(--head-font);
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+
+    .engine p {
+      font-size: 0.88rem;
+      color: #c9c3b8;
+      line-height: 1.7;
+    }
+
+    .engine .provides {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .engine .provides span {
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: 1px solid #3a3a36;
+      border-radius: 20px;
+      padding: 4px 12px;
+      color: #b0aa9e;
+    }
+
+    /* Connector arrow */
+    .powers-arrow {
+      text-align: center;
+      color: var(--teal);
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    /* Excursions mini-row inside flight plan */
+    .excursion-mini {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 600px) {
+      .excursion-mini { grid-template-columns: 1fr; }
+    }
+
+    .excursion-mini .chip {
+      background: var(--teal-soft);
+      border-radius: 6px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .excursion-mini .chip strong {
+      display: block;
+      font-family: var(--head-font);
+      font-weight: 400;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .excursion-mini .chip span {
+      font-size: 0.76rem;
+      color: #5a6b69;
+    }
+
+    /* Commercial outcome statement */
+    .outcome {
+      border-left: 3px solid var(--gold);
+      padding: 12px 0 12px 20px;
+      font-family: var(--head-font);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    /* =====================
+       MAP SECTION
+    ===================== */
+    .map-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .map-card {
+      background: #fff;
+      border: 1px solid var(--mist);
+      border-radius: 4px;
+      padding: 20px;
+    }
+
+    .map-card .icon { font-size: 1.4rem; margin-bottom: 8px; }
+
+    .map-card h4 {
+      font-family: var(--head-font);
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+
+    .map-card p { font-size: 0.82rem; color: #666; }
+
+    /* =====================
+       BUCKET LIST
+    ===================== */
+    .bucket-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 12px;
+    }
+
+    .bucket-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: var(--teal-soft);
+      border-radius: 4px;
+      padding: 14px 16px;
+      font-size: 0.88rem;
+    }
+
+    .bucket-list li .status { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+    .bucket-list li strong { display: block; font-weight: 500; margin-bottom: 2px; }
+
+    .bucket-list li span { color: #555; font-size: 0.8rem; }
+
+    /* =====================
+       EXCURSIONS
+    ===================== */
+    .excursion-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .excursion-card {
+      border-left: 3px solid var(--teal);
+      padding: 20px 20px 20px 22px;
+      background: #fff;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .excursion-card .tag {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+
+    .excursion-card h3 {
+      font-family: var(--head-font);
+      font-size: 1.15rem;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .excursion-card p { font-size: 0.85rem; color: #555; line-height: 1.65; }
+
+    /* =====================
+       POSTCARDS
+    ===================== */
+    .postcard-stack {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .postcard {
+      background: #fff;
+      border: 1px solid var(--mist);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .postcard-top {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 18px 20px 14px;
+    }
+
+    .postcard-top .date {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .postcard-top h3 {
+      font-family: var(--head-font);
+      font-size: 1.05rem;
+      font-weight: 400;
+    }
+
+    .postcard-body {
+      padding: 18px 20px;
+      font-size: 0.85rem;
+      color: #444;
+      line-height: 1.7;
+    }
+
+    .postcard-footer {
+      padding: 0 20px 16px;
+      font-size: 0.78rem;
+      color: var(--teal);
+      font-weight: 500;
+    }
+
+    /* =====================
+       STAMPS
+    ===================== */
+    .stamps-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .stamp {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 130px;
+      height: 130px;
+      border: 2px dashed var(--teal);
+      border-radius: 4px;
+      text-align: center;
+      padding: 12px;
+      background: var(--teal-soft);
+    }
+
+    .stamp.earned {
+      border-style: solid;
+      background: var(--teal);
+      color: #fff;
+    }
+
+    .stamp .stamp-icon { font-size: 1.8rem; margin-bottom: 6px; }
+
+    .stamp .stamp-name {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      line-height: 1.3;
+    }
+
+    .stamp.earned .stamp-date {
+      font-size: 0.65rem;
+      margin-top: 4px;
+      opacity: 0.8;
+    }
+
+    .stamp:not(.earned) { opacity: 0.4; }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    footer {
+      background: var(--ink);
+      color: #888;
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 0.8rem;
+    }
+
+    footer a { color: var(--gold); }
+  </style>
+</head>
 <body>
 
-<h1>JuJu Journey</h1>
+  <!-- ==================== HEADER / PASSPORT ==================== -->
+  <header>
+    <p class="passport-label">✦ Passport ✦</p>
+    <h1>JujuJourney — <em>Learning in Public</em></h1>
+    <p class="tagline">A field notebook documenting the journey from Operator to Systems Builder.</p>
+    <div class="boarding-strip">
+      <span>AMS</span> ✈ <span>EVERYWHERE</span> · JouJou Bee · jujujourney.ai
+    </div>
+  </header>
 
-<p>Learning in Public. Building in Public.</p>
+  <!-- ==================== NAVIGATION ==================== -->
+  <nav aria-label="Journey navigation">
+    <ul>
+      <li><a href="#passport">Passport</a></li>
+      <li><a href="#flight-plan">Flight Plan</a></li>
+      <li><a href="#map">Map</a></li>
+      <li><a href="#bucket-list">Bucket List</a></li>
+      <li><a href="#excursions">Excursions</a></li>
+      <li><a href="#postcards">Postcards</a></li>
+      <li><a href="#stamps">Stamps</a></li>
+    </ul>
+  </nav>
 
-<p>
-A collection of AI, GTM, hospitality, operations and business sandboxes built through real-world projects.
-</p>
+  <!-- ==================== PASSPORT ==================== -->
+  <section id="passport">
+    <div class="container">
+      <p class="section-label">Passport — Who I Am</p>
+      <h2>Origin Story</h2>
+      <p class="section-intro">
+        I've packed my luggage with curiosity, creativity, and a desire to create value.
+        Rather than waiting until I have everything figured out, I've chosen to learn in public.
+      </p>
+      <div class="passport-bio">
+        <div class="bio-block">
+          <h3>The Traveller</h3>
+          <p>
+            JouJou Bee. Amsterdam-based, originally from the Philippines.
+            My journey has crossed hospitality floors, platform businesses,
+            commercial operations, and technology. I love exploring, and
+            curiosity has a way of adding new pieces to the map.
+            Languages: Dutch, English, French, German, Italian, Tagalog.
+          </p>
+        </div>
+        <div class="bio-block">
+          <h3>The Journey</h3>
+          <p>
+            This is not a portfolio. This is a field notebook —
+            a record of lessons learned, experiments run, and observations
+            gathered from real projects. Each experience, course, conversation,
+            and experiment reveals another part of the journey, and I'm still exploring.
+            Consider it a postcard from the road.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<h2>What This Site Is</h2>
+  <!-- ==================== FLIGHT PLAN ==================== -->
+  <section id="flight-plan">
+    <div class="container">
+      <p class="section-label">Flight Plan — How It Connects</p>
+      <h2>The Journey, Mapped</h2>
+      <p class="flightplan-intro">
+        JujuJourney is the container. It documents one journey: from Operator to Systems Builder.
+        Inside it, one engine powers the trip — and three excursions are where the lessons get applied.
+      </p>
 
-<p>
-This website documents my transition from hospitality and platform operations
-into AI, GTM, SaaS sales and digital consultancy.
+      <!-- The Engine -->
+      <div class="engine">
+        <p class="engine-label">⚙ The Engine</p>
+        <h3>Career Engine</h3>
+        <p>
+          Employment powers the journey. It is not an excursion — it is the engine.
+          It provides the fuel that makes everything else possible.
+        </p>
+        <div class="provides">
+          <span>Salary</span>
+          <span>Commercial Repetition</span>
+          <span>Measurable Outcomes</span>
+          <span>Credibility</span>
+          <span>Practical Experience</span>
+        </div>
+      </div>
 
-Every sandbox is built around a real-world objective rather than a theoretical exercise.
-</p>
+      <p class="powers-arrow">↓ powers ↓</p>
 
-<h2>Current Sandboxes</h2>
+      <!-- The Excursions (mini preview) -->
+      <div class="excursion-mini">
+        <div class="chip">
+          <strong>Atelier Delia</strong>
+          <span>Natural ingredients &amp; value creation</span>
+        </div>
+        <div class="chip">
+          <strong>Digital Lighthouse</strong>
+          <span>Visibility &amp; go-to-market lab</span>
+        </div>
+        <div class="chip">
+          <strong>Lab Assente</strong>
+          <span>Hospitality &amp; service design</span>
+        </div>
+      </div>
 
-<ul>
-<li><a href="anthropic-ai.html">Anthropic AI Essentials Sandbox</a></li>
-<li><a href="zuidstraat-84-gtm.html">Zuidstraat 84 GTM Case Study</a></li>
-<li><a href="1161-shifts.html">1161 Shift Project</a></li>
-</ul>
+      <!-- Commercial Outcome statement -->
+      <p class="outcome">
+        The goal is not to become AI literate.
+        The goal is to use AI literacy to create meaningful outcomes —
+        better decisions, better systems, better visibility, real results.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== MAP ==================== -->
+  <section id="map">
+    <div class="container">
+      <p class="section-label">Map — Where I've Been</p>
+      <h2>Places, Experiences &amp; Milestones</h2>
+      <p class="section-intro">
+        Places explored across hospitality, platform businesses, commercial operations,
+        and technology. The proof is the pattern, not the logos.
+      </p>
+      <div class="map-grid">
+
+        <!-- Edit these cards freely -->
+        <div class="map-card">
+          <div class="icon">🏛️</div>
+          <h4>Global Tech HQ</h4>
+          <p>Premium hospitality operations</p>
+        </div>
+        <div class="map-card">
+          <div class="icon">📈</div>
+          <h4>European Financial Exchange</h4>
+          <p>Premium hospitality operations</p>
+        </div>
+        <div class="map-card">
+          <div class="icon">⚖️</div>
+          <h4>International Law Firm</h4>
+          <p>Premium hospitality operations</p>
+        </div>
+        <div class="map-card">
+          <div class="icon">🏨</div>
+          <h4>Leading Amsterdam Hospitality</h4>
+          <p>Premium venues across the city</p>
+        </div>
+        <div class="map-card">
+          <div class="icon">🧪</div>
+          <h4>World-Leading Fragrance Houses</h4>
+          <p>Where the Atelier Delia curiosity began</p>
+        </div>
+        <div class="map-card">
+          <div class="icon">🤖</div>
+          <h4>Claude 101</h4>
+          <p>Anthropic AI Essentials · ✅ Completed</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== BUCKET LIST ==================== -->
+  <section id="bucket-list">
+    <div class="container">
+      <p class="section-label">Bucket List — Where I'm Going</p>
+      <h2>Future Destinations</h2>
+      <p class="section-intro">Courses, certifications, skills, and experiences I am heading toward.</p>
+      <ul class="bucket-list">
+
+        <!-- Edit these items freely. Use ⬜ for not started, 🔄 for in progress, ✅ for done -->
+        <li>
+          <span class="status">✅</span>
+          <div><strong>Claude 101</strong><span>Anthropic AI Essentials</span></div>
+        </li>
+        <li>
+          <span class="status">🔄</span>
+          <div><strong>Claude Code 101</strong><span>Anthropic AI Essentials</span></div>
+        </li>
+        <li>
+          <span class="status">⬜</span>
+          <div><strong>HubSpot CRM Certification</strong><span>Sales &amp; CRM fundamentals</span></div>
+        </li>
+        <li>
+          <span class="status">⬜</span>
+          <div><strong>Salesforce Trailhead</strong><span>CRM · Week 2</span></div>
+        </li>
+        <li>
+          <span class="status">⬜</span>
+          <div><strong>Google Analytics 4</strong><span>Data &amp; reporting</span></div>
+        </li>
+        <li>
+          <span class="status">⬜</span>
+          <div><strong>Grasse, France</strong><span>Perfumery capital · Atelier Delia</span></div>
+        </li>
+        <li>
+          <span class="status">⬜</span>
+          <div><strong>San Sebastián</strong><span>Culinary exploration · Lab Assente</span></div>
+        </li>
+        <li>
+          <span class="status">⬜</span>
+          <div><strong>Marrakesh</strong><span>Botanical ingredients · Atelier Delia</span></div>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- ==================== EXCURSIONS ==================== -->
+  <section id="excursions">
+    <div class="container">
+      <p class="section-label">Excursions — Where I'm Exploring</p>
+      <h2>Learning Environments</h2>
+      <p class="section-intro">
+        These are not businesses. They are real-world sandboxes where the lessons from the
+        Career Engine get applied — generating observations, skills, content, and opportunities.
+      </p>
+      <div class="excursion-grid">
+
+        <div class="excursion-card">
+          <p class="tag">Excursion 01</p>
+          <h3>Atelier Delia</h3>
+          <p>
+            A learning environment exploring how natural ingredients create value —
+            through botanical materials, wellness, sensory experience, and storytelling.
+            Scent is the current medium and entry point, not the whole purpose.
+          </p>
+        </div>
+
+        <div class="excursion-card">
+          <p class="tag">Excursion 02</p>
+          <h3>Digital Lighthouse</h3>
+          <p>
+            A learning sandbox and visibility laboratory for marketing, sales, go-to-market,
+            and AI-assisted workflows. It complements specialists rather than competing with them.
+            Current sandbox: the Zuidstraat 84 case study.
+          </p>
+        </div>
+
+        <div class="excursion-card">
+          <p class="tag">Excursion 03</p>
+          <h3>Lab Assente</h3>
+          <p>
+            A learning environment focused on hospitality expertise, culinary repertoire,
+            service design, and consulting philosophy. The consultancy stands on its own merits.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== POSTCARDS ==================== -->
+  <section id="postcards">
+    <div class="container">
+      <p class="section-label">Postcards — What I Learned</p>
+      <h2>From The Road</h2>
+      <p class="section-intro">
+        Every postcard follows the same format: What happened. What I learned. The observation. The afterthought.
+      </p>
+      <div class="postcard-stack">
+
+        <!-- Postcard 1 — Claude 101 -->
+        <div class="postcard">
+          <div class="postcard-top">
+            <p class="date">June 2026 · Amsterdam</p>
+            <h3>Claude 101 — First Departure</h3>
+          </div>
+          <div class="postcard-body">
+            I completed Claude 101 through Anthropic Academy and immediately
+            used it on a live project. The sandbox is not theoretical.
+            Every lesson connects to a real outcome.
+          </div>
+          <div class="postcard-footer">
+            → <a href="anthropic-ai.html">Read the full sandbox</a>
+          </div>
+        </div>
+
+        <!-- Postcard 2 — placeholder -->
+        <div class="postcard">
+          <div class="postcard-top">
+            <p class="date">Coming Soon</p>
+            <h3>Next Postcard</h3>
+          </div>
+          <div class="postcard-body">
+            The next postcard is being written. Every experience becomes a lesson.
+            Every lesson becomes content.
+          </div>
+          <div class="postcard-footer">
+            → Stay tuned
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== STAMPS ==================== -->
+  <section id="stamps">
+    <div class="container">
+      <p class="section-label">Stamps — What I've Completed</p>
+      <h2>Verified Achievements</h2>
+      <p class="section-intro">A stamp means: I completed the journey. These are earned, not claimed.</p>
+      <div class="stamps-grid">
+
+        <!-- Earned stamp -->
+        <div class="stamp earned">
+          <div class="stamp-icon">🤖</div>
+          <div class="stamp-name">Claude 101</div>
+          <div class="stamp-date">June 2026</div>
+        </div>
+
+        <!-- Not yet earned — add more as you complete them -->
+        <div class="stamp">
+          <div class="stamp-icon">💻</div>
+          <div class="stamp-name">Claude Code 101</div>
+        </div>
+        <div class="stamp">
+          <div class="stamp-icon">📊</div>
+          <div class="stamp-name">HubSpot CRM</div>
+        </div>
+        <div class="stamp">
+          <div class="stamp-icon">☁️</div>
+          <div class="stamp-name">Salesforce Trailhead</div>
+        </div>
+        <div class="stamp">
+          <div class="stamp-icon">📈</div>
+          <div class="stamp-name">Google Analytics 4</div>
+        </div>
+        <div class="stamp">
+          <div class="stamp-icon">🌸</div>
+          <div class="stamp-name">Atelier Delia Launch</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <p>JujuJourney · Learning in Public · Amsterdam ·
+      <a href="mailto:hello@jujujourney.ai">hello@jujujourney.ai</a>
+    </p>
+    <p style="margin-top:8px; font-size:0.72rem;">
+      Experience → Course → Experiment → Reflection → Content
+    </p>
+  </footer>
 
 </body>
 </html>
