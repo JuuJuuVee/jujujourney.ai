@@ -310,6 +310,250 @@
       color: var(--ink);
       line-height: 1.5;
     }
+    /* =====================
+       DEPARTURES / FIDS
+    ===================== */
+    .fids-wrap {
+      margin-top: 48px;
+      padding-top: 40px;
+      border-top: 1px solid var(--mist);
+    }
+
+    .fids-eyebrow {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+
+    .fids-heading {
+      font-family: var(--head-font);
+      font-size: clamp(1.3rem, 3vw, 1.7rem);
+      font-weight: 400;
+      margin-bottom: 24px;
+      line-height: 1.25;
+    }
+
+    .fids-header {
+      background: #111827;
+      border-radius: 6px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+    }
+
+    .fids-sub {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #5b8fa8;
+      margin-bottom: 6px;
+    }
+
+    .fids-title {
+      font-family: var(--head-font);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: #f0f4f8;
+      margin-bottom: 6px;
+    }
+
+    .fids-desc {
+      font-size: 0.85rem;
+      color: #7a90a8;
+      line-height: 1.65;
+    }
+
+    .fids-status {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      border: 1px solid var(--mist);
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .fids-status { grid-template-columns: 1fr; }
+    }
+
+    .sc-lbl {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 3px;
+    }
+
+    .sc-val {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .sc-val.active { color: var(--teal); }
+
+    .fids-divider {
+      border: none;
+      border-top: 1px solid var(--mist);
+      margin: 20px 0;
+    }
+
+    .fids-lbl {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 12px;
+    }
+
+    .stage-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--mist);
+    }
+
+    .stage-row:last-child { border-bottom: none; }
+
+    .stage-name {
+      font-size: 0.82rem;
+      font-weight: 500;
+      min-width: 96px;
+    }
+
+    .bar-bg {
+      flex: 1;
+      height: 5px;
+      background: var(--mist);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .bar-fill { height: 100%; border-radius: 3px; }
+
+    .bar-pct {
+      font-size: 0.75rem;
+      color: #999;
+      min-width: 30px;
+      text-align: right;
+    }
+
+    .milestone-row {
+      display: flex;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--mist);
+      align-items: flex-start;
+    }
+
+    .milestone-row:last-child { border-bottom: none; }
+
+    .m-date {
+      font-size: 0.7rem;
+      color: #999;
+      min-width: 74px;
+      padding-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .m-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .dot-done     { background: #1D9E75; }
+    .dot-active   { background: var(--teal); }
+    .dot-next     { background: var(--mist); border: 1.5px solid #bbb; }
+    .dot-decision { background: var(--gold); }
+
+    .m-title { font-size: 0.82rem; color: var(--ink); line-height: 1.4; }
+    .m-sub   { font-size: 0.75rem; color: #888; margin-top: 2px; line-height: 1.5; }
+
+    .bdg {
+      display: inline-block;
+      font-size: 0.65rem;
+      padding: 1px 7px;
+      border-radius: 4px;
+      margin-left: 5px;
+      vertical-align: middle;
+    }
+
+    .bd { background: #d4f0e4; color: #0a5c38; }
+    .ba { background: var(--teal-soft); color: var(--teal); }
+    .bw { background: var(--mist); color: #888; }
+    .bm { background: #faecd6; color: #8a5208; }
+
+    .tool-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .tool-tag {
+      font-size: 0.75rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--mist);
+      color: var(--ink);
+      background: var(--paper);
+    }
+
+    .course-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--mist);
+      font-size: 0.82rem;
+    }
+
+    .course-row:last-child { border-bottom: none; }
+    .c-name { flex: 1; }
+    .c-provider { font-size: 0.72rem; color: #999; min-width: 90px; }
+
+    .exp-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      background: var(--mist);
+      border-radius: 4px;
+      margin-bottom: 6px;
+      font-size: 0.82rem;
+    }
+
+    .career-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 600px) {
+      .career-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .stat-card {
+      border-radius: 6px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: var(--head-font);
+      font-size: 1.8rem;
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: #888;
+      margin-top: 5px;
+    }
 
     /* =====================
        MAP SECTION
@@ -620,6 +864,122 @@
         The goal is to use AI literacy to create meaningful outcomes,
         better decisions, better systems, better visibility, real results.
       </p>
+      <!-- ── DEPARTURES / FIDS ── -->
+      <div class="fids-wrap" id="departures">
+
+        <p class="fids-eyebrow">Departures ✦ Live Status Board</p>
+        <h3 class="fids-heading">What's In Motion</h3>
+
+        <div class="fids-header">
+          <p class="fids-sub">Flight Information Display System</p>
+          <p class="fids-title">JujuJourney</p>
+          <p class="fids-desc">The journey began with a decision. Everything on this board is what happened after.</p>
+        </div>
+
+        <div class="fids-status">
+          <div><p class="sc-lbl">Current focus</p><p class="sc-val active">Connect GA4 + HubSpot to Zuidstraat 84</p></div>
+          <div><p class="sc-lbl">Current sandbox</p><p class="sc-val">Digital Lighthouse / Zuidstraat 84</p></div>
+          <div><p class="sc-lbl">Current stage</p><p class="sc-val active">Build</p></div>
+          <div><p class="sc-lbl">Next milestone</p><p class="sc-val">GA4 connected</p></div>
+          <div><p class="sc-lbl">Success metric</p><p class="sc-val">First attributable viewing</p></div>
+          <div><p class="sc-lbl">Last updated</p><p class="sc-val">June 25 2026</p></div>
+        </div>
+
+        <hr class="fids-divider">
+
+        <p class="fids-lbl">Five stages — where I am now</p>
+        <div style="margin-bottom:20px;">
+          <div class="stage-row"><span class="stage-name">Time</span><div class="bar-bg"><div class="bar-fill" style="width:100%;background:#1D9E75;"></div></div><span class="bar-pct">100%</span></div>
+          <div class="stage-row"><span class="stage-name">Discipline</span><div class="bar-bg"><div class="bar-fill" style="width:30%;background:var(--teal);"></div></div><span class="bar-pct">30%</span></div>
+          <div class="stage-row"><span class="stage-name">Build</span><div class="bar-bg"><div class="bar-fill" style="width:55%;background:var(--teal);"></div></div><span class="bar-pct">55%</span></div>
+          <div class="stage-row"><span class="stage-name">Measure</span><div class="bar-bg"><div class="bar-fill" style="width:5%;background:var(--gold);"></div></div><span class="bar-pct">5%</span></div>
+          <div class="stage-row"><span class="stage-name">Evidence</span><div class="bar-bg"></div><span class="bar-pct">0%</span></div>
+        </div>
+
+        <hr class="fids-divider">
+
+        <p class="fids-lbl">Build log — confirmed milestones</p>
+        <div style="margin-bottom:20px;">
+          <div class="milestone-row"><span class="m-date">The decision</span><div class="m-dot dot-decision"></div><div><p class="m-title">Stop doomscrolling. Start building. <span class="bdg bm">inciting incident</span></p><p class="m-sub">No certificate. No website. Just a commitment to replace passive consumption with active learning.</p></div></div>
+          <div class="milestone-row"><span class="m-date">11 Jun 2026</span><div class="m-dot dot-done"></div><div><p class="m-title">Claude 101 completed — 90% <span class="bdg bd">confirmed</span></p><p class="m-sub">First verifiable AI credential. First JujuJourney stamp. First boarding pass.</p></div></div>
+          <div class="milestone-row"><span class="m-date">Jun 2026</span><div class="m-dot dot-done"></div><div><p class="m-title">First tools activated <span class="bdg bd">confirmed</span></p><p class="m-sub">Claude, ChatGPT, Gemini, Perplexity, NotebookLM — all in active use on real tasks.</p></div></div>
+          <div class="milestone-row"><span class="m-date">Jun 2026</span><div class="m-dot dot-done"></div><div><p class="m-title">Claude 101 → NotebookLM video <span class="bdg bd">confirmed</span></p><p class="m-sub">First LLM content converted into a playable video. Learn → apply, immediately.</p></div></div>
+          <div class="milestone-row"><span class="m-date">Jun 2026</span><div class="m-dot dot-done"></div><div><p class="m-title">Notion framework started <span class="bdg bd">confirmed</span></p><p class="m-sub">Operational backbone. Daily agenda. Three-track operating system.</p></div></div>
+          <div class="milestone-row"><span class="m-date">13 Jun 2026</span><div class="m-dot dot-done"></div><div><p class="m-title">Digital Lighthouse infrastructure live <span class="bdg bd">confirmed</span></p><p class="m-sub">Domains registered. DNS configured. GitHub Pages deployed. Email routing active.</p></div></div>
+          <div class="milestone-row"><span class="m-date">Jun 2026</span><div class="m-dot dot-done"></div><div><p class="m-title">CV and cover letters produced <span class="bdg bd">confirmed</span></p><p class="m-sub">English and Dutch. First job applications submitted.</p></div></div>
+          <div class="milestone-row"><span class="m-date">22 Jun 2026</span><div class="m-dot dot-done"></div><div><p class="m-title">JujuJourney live <span class="bdg bd">confirmed</span></p><p class="m-sub">Public learning container. Governance framework, three excursions, career engine documented.</p></div></div>
+          <div class="milestone-row"><span class="m-date">23 Jun 2026</span><div class="m-dot dot-done"></div><div><p class="m-title">Digital Lighthouse homepage live <span class="bdg bd">confirmed</span></p><p class="m-sub">digitallighthouse.online — methodology, lighthouse concept, case study entry point.</p></div></div>
+          <div class="milestone-row"><span class="m-date">23 Jun 2026</span><div class="m-dot dot-active"></div><div><p class="m-title">Zuidstraat 84 case study published <span class="bdg ba">active</span></p><p class="m-sub">Baseline documented. Experiment framework live. Measurement infrastructure pending.</p></div></div>
+          <div class="milestone-row"><span class="m-date">29 Jun 2026</span><div class="m-dot dot-active"></div><div><p class="m-title">First job interview — SDR role <span class="bdg ba">monday</span></p><p class="m-sub">First video call from the career engine. Applied, reviewed, invited.</p></div></div>
+          <div class="milestone-row"><span class="m-date">—</span><div class="m-dot dot-next"></div><div><p class="m-title">Notion habit built <span class="bdg bw">next</span></p><p class="m-sub">Monday. Daily update routine before connecting measurement tools.</p></div></div>
+          <div class="milestone-row"><span class="m-date">—</span><div class="m-dot dot-next"></div><div><p class="m-title">GA4 + HubSpot connected <span class="bdg bw">next</span></p><p class="m-sub">Measurement infrastructure live on Zuidstraat 84.</p></div></div>
+          <div class="milestone-row"><span class="m-date">—</span><div class="m-dot dot-next"></div><div><p class="m-title">Zuidstraat 84 experiment starts <span class="bdg bw">next</span></p><p class="m-sub">GEO-optimised content live. Organic 21-day test begins.</p></div></div>
+        </div>
+
+        <hr class="fids-divider">
+
+        <p class="fids-lbl">Tools — confirmed in active use</p>
+        <div class="tool-grid" style="margin-bottom:20px;">
+          <span class="tool-tag">Claude</span>
+          <span class="tool-tag">ChatGPT</span>
+          <span class="tool-tag">Gemini</span>
+          <span class="tool-tag">Perplexity</span>
+          <span class="tool-tag">NotebookLM</span>
+          <span class="tool-tag">GitHub</span>
+          <span class="tool-tag">Cloudflare</span>
+          <span class="tool-tag">Notion</span>
+          <span class="tool-tag">LinkedIn</span>
+        </div>
+
+        <hr class="fids-divider">
+
+        <p class="fids-lbl">Discipline track — courses</p>
+        <div style="margin-bottom:20px;">
+          <div class="course-row"><div class="m-dot dot-done" style="flex-shrink:0;"></div><span class="c-name">Claude 101</span><span class="c-provider">Anthropic</span><span class="bdg bd">completed 90%</span></div>
+          <div class="course-row"><div class="m-dot dot-done" style="flex-shrink:0;"></div><span class="c-name">NotebookLM fundamentals</span><span class="c-provider">Google</span><span class="bdg bd">used in practice</span></div>
+          <div class="course-row"><div class="m-dot dot-active" style="flex-shrink:0;"></div><span class="c-name">Notion — habit building</span><span class="c-provider">Notion</span><span class="bdg ba">Monday</span></div>
+          <div class="course-row"><div class="m-dot dot-next" style="flex-shrink:0;"></div><span class="c-name">HubSpot CRM + Inbound Sales</span><span class="c-provider">HubSpot Academy</span><span class="bdg bw">next</span></div>
+          <div class="course-row"><div class="m-dot dot-next" style="flex-shrink:0;"></div><span class="c-name">Google Analytics 4</span><span class="c-provider">Google</span><span class="bdg bw">planned</span></div>
+          <div class="course-row"><div class="m-dot dot-next" style="flex-shrink:0;"></div><span class="c-name">LinkedIn Social Selling Index</span><span class="c-provider">LinkedIn</span><span class="bdg bw">planned</span></div>
+          <div class="course-row"><div class="m-dot dot-next" style="flex-shrink:0;"></div><span class="c-name">Salesforce Trailhead</span><span class="c-provider">Salesforce</span><span class="bdg bw">planned</span></div>
+          <div class="course-row"><div class="m-dot dot-next" style="flex-shrink:0;"></div><span class="c-name">Meta Blueprint</span><span class="c-provider">Meta</span><span class="bdg bw">planned</span></div>
+          <div class="course-row"><div class="m-dot dot-next" style="flex-shrink:0;"></div><span class="c-name">n8n automation</span><span class="c-provider">n8n</span><span class="bdg bw">planned</span></div>
+        </div>
+
+        <hr class="fids-divider">
+
+        <p class="fids-lbl">Experiment — Digital Lighthouse / Zuidstraat 84</p>
+        <div style="margin-bottom:20px;">
+          <div class="exp-row"><div class="m-dot dot-done" style="flex-shrink:0;"></div><span>Research completed — June 23 2026</span></div>
+          <div class="exp-row"><div class="m-dot dot-done" style="flex-shrink:0;"></div><span>Case study framework published — June 23 2026</span></div>
+          <div class="exp-row"><div class="m-dot dot-active" style="flex-shrink:0;"></div><span>Landing page under construction</span></div>
+          <div class="exp-row"><div class="m-dot dot-next" style="flex-shrink:0;"></div><span style="color:#999;">GA4 connected</span></div>
+          <div class="exp-row"><div class="m-dot dot-next" style="flex-shrink:0;"></div><span style="color:#999;">HubSpot connected</span></div>
+          <div class="exp-row"><div class="m-dot dot-next" style="flex-shrink:0;"></div><span style="color:#999;">AI indexing confirmed</span></div>
+          <div class="exp-row"><div class="m-dot dot-next" style="flex-shrink:0;"></div><span style="color:#999;">Organic experiment starts</span></div>
+          <div class="exp-row"><div class="m-dot dot-next" style="flex-shrink:0;"></div><span style="color:#999;">First AI referral</span></div>
+          <div class="exp-row"><div class="m-dot dot-next" style="flex-shrink:0;"></div><span style="color:#999;">First enquiry</span></div>
+          <div class="exp-row"><div class="m-dot dot-next" style="flex-shrink:0;"></div><span style="color:#999;">First attributable viewing</span></div>
+          <div class="exp-row" style="margin-bottom:0;"><div class="m-dot dot-next" style="flex-shrink:0;"></div><span style="color:#999;">Sale — case study complete</span></div>
+        </div>
+
+        <hr class="fids-divider">
+
+        <p class="fids-lbl">Career engine — live stats</p>
+        <div class="career-stats">
+          <div class="stat-card" style="background:var(--mist);"><div class="stat-num">9</div><div class="stat-label">Applications sent</div></div>
+          <div class="stat-card" style="background:var(--mist);"><div class="stat-num">5</div><div class="stat-label">Rejections received</div></div>
+          <div class="stat-card" style="background:var(--mist);"><div class="stat-num">3</div><div class="stat-label">Pending</div></div>
+          <div class="stat-card" style="background:var(--teal-soft);"><div class="stat-num" style="color:var(--teal);">1</div><div class="stat-label" style="color:var(--teal);">Interview booked</div></div>
+        </div>
+        <p style="font-size:0.75rem;color:#999;margin-top:8px;">Roles targeted: Account Manager, Customer Success Manager, SDR. No company names disclosed.</p>
+
+        <hr class="fids-divider">
+
+        <p style="font-size:0.75rem;color:#999;line-height:1.6;">Every entry is real. Dates confirmed or marked pending. No aspirational numbers. Updated as the journey unfolds. Last updated: June 25 2026.</p>
+
+      </div>
+      
     </div>
   </section>
 
